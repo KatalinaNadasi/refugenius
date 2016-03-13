@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :emplois
 
+  resources :companies, only: :show
+
   namespace :companies do
     resources :emplois, only: [:index, :show, :new, :create, :destroy]
   end
