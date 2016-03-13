@@ -1,0 +1,58 @@
+require "csv"
+
+def add_refugee(firstname, lastname, email, tel, localization, domain, education, status, experience_list, skills)
+	# Adds a refugee to the csv database. All the inputs are strings, experience_list 
+	# and skills are of the format "entry1,entry2,...,entryn"
+	CSV.open("refugees.csv", "a+", {:col_sep => ";"}) do |csv|
+		csv << [firstname, lastname, email, tel, localization, domain, education, status, experience_list, skills]
+	end
+end
+
+def add_company(name, localization, email, tel, logo, description, site)
+	# Adds a company to the csv database. All the inputs are strings, logo has yet to
+	# have added support
+	CSV.open("companies.csv", "a+", {:col_sep => ";"}) do |csv|
+		csv << [name, localization, email, tel, logo, description, site]
+	end
+end
+
+def add_offer(company_name, offer_name, domain, localization, description, skills)
+	# Adds an offer to a company's csv offer database. All the inputs are strings,
+	# skills is of the form "skill1,skill2,...,skilln"
+	CSV.open(company_name+"_offers.csv", "a+", {:col_sep => ";"}) do |csv|
+  		csv << [offer_name, domain, localization, description, skills]
+	end
+end
+
+def matching(refugee_skills)
+	# Matches a refugee to his best offers, based on the intersection of his skills
+	# with the skills required for the offer. Returns a list in decreasing order of
+	# match in the format [match_coefficient, [company_attributes], [offer_attributes]]
+	bestoffers = Array.new([])
+	for emploi in Emploi.all
+		coefficient = (emploi["skill"].split(",") & refugee_skills.split(",")).length
+		bestoffers.push([coefficient, emploi["id"], emploi["company_id"]])
+	end
+	bestoffers.sort! {|x,y| y[0]<=>x[0]}
+	return bestoffers
+end
+
+#firstname = String.new("Nestor")
+#lastname = String.new("Grace")
+#email = String.new("grace@gmail.com")
+#tel = String.new("06293864")
+#localization = String.new("Paris")
+#domain = String.new("HR")
+#education = String.new("University")
+#status = String.new("Refugee")
+#experience = String.new("3:Work on blabla")
+#skills = String.new("Excel,Communication")
+
+#name = String.new("Sony")
+#localization = String.new("Berlin")
+#tel = String.new("06897145")
+#email = String.new("contact@sony.org")
+#logo = nil
+#description = String.new("Electronics and software")
+#site = String.new("sony.org")
+#add_company(name, localization, email, tel, logo, description, site)

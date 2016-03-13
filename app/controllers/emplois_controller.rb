@@ -7,4 +7,5 @@ class EmploisController < ApplicationController
   def show
     @emploi = Emploi.find(params[:id])
   end
+
 end

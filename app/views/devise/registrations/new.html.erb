@@ -4,9 +4,16 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, required: true %>
+    <%= f.input :first_name, required: true, label: "Prénom" %>
+    <%= f.input :last_name, required: true, label: "Nom" %>
+    <%= f.input :skill, required: true, autofocus: true, label: "Compétence" %>
+    <%= f.input :language, required: true, autofocus: true, label: "Langue" %>
+    <%= f.input :email, required: true, autofocus: true, label: "Adresse email" %>
+    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length), label: "Mot de passe" %>
+    <%= f.input :password_confirmation, required: true, label: "Confirmation mot de passe" %>
+    <%= f.input :telephone, required: true, autofocus: true, label: "Télphone" %>
+    <%= f.input :localisation, required: true, autofocus: true, label: "Localisation" %>
+
   </div>
 
   <div class="form-actions">
