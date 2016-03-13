@@ -1,1 +1,19 @@
 <p>Hey</p>
+
+<%= simple_form_for @emploi, url: companies_emplois_path do |f| %>
+  <%= f.error_notification %>
+
+<div class="form-inputs">
+    <%= f.input :name, required: true, label: "Nom de l'offre" %>
+    <%= f.input :domain, required: true, label: "Domaine" %>
+    <%= f.input :skill, required: true, label: "Compétence" %>
+    <%= f.input :language, required: true, label: "Langue requise" %>
+    <%= f.input :description, required: true, label: "Description" %>
+    <%= f.input :localisation, required: true, label: "Localisation" %>
+</div>
+
+<div class="form-actions">
+    <%= f.button :submit, "Créer" %>
+</div>
+
+<% end %>

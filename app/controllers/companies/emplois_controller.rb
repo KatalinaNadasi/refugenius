@@ -14,11 +14,11 @@ class Companies::EmploisController < ApplicationController
   end
 
   def create
-    @company = Company.find(params[:id])
-    @emloi = Emploi.create(emploi_params)
+    @emploi = current_company.emplois.build(emploi_params)
+    @emploi.save
 
     if @emploi.save
-      redirect_to company_path(@company)
+      redirect_to company_path(@emploi.company.id)
     else
       redirect :back
     end
@@ -32,6 +32,6 @@ class Companies::EmploisController < ApplicationController
   private
 
   def emploi_params
-    params.require(:emploi).permit(:content)
+    params.require(:emploi).permit(:name, :domain, :skill, :language, :description, :localisation)
   end
 end
