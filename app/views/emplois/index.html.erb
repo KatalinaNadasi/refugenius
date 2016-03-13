@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="row padding-top">
+    <% @emploi.each do |emploi| %>
+      <div class="border-top">
+        <div class="border-bottom padding-bottom-small text-center">
+            <h3><%= emploi.name %></h3>
+            <h3><%= emploi.description %></h3>
+            <h3><%= emploi.localisation %></h3>
+            <p><%= link_to "Voir l'offre", emploi_path(emploi.id) %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
